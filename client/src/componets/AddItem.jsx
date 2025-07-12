@@ -22,7 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 
-export function AddItem() {
+export default function AddItem() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [images, setImages] = useState([]);
