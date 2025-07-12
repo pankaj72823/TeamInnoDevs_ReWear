@@ -6,7 +6,7 @@ import Navbar from './componets/Navbar'
 import Login from './componets/Login'
 import Browse from './componets/Browse'
 import AddItem from './componets/AddItem'
-import { Button } from "@/components/ui/button"
+
 
 
 function App() {
@@ -15,7 +15,6 @@ function App() {
     {/* define all route here */}
      <BrowserRouter>
       <Navbar />
-      <Button className="m-4">Click me</Button>
       {/* Define your routes here */}
       <Routes>
         <Route path="/login" element={<Login />} />
