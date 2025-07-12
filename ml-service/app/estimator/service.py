@@ -54,20 +54,33 @@ class ResearchBasedSustainabilityEstimator:
             'Denim': {'co2_per_kg': 23.2, 'water_per_kg': 10850, 'source': 'Quantis 2018'},
             'Khadi': {'co2_per_kg': 5.0, 'water_per_kg': 4000, 'source': 'Estimated based on hand-spun/woven characteristics'},
         }
+
         garment_specs = {
             'T-shirt': {'weight_kg': 0.18, 'manufacturing_multiplier': 1.4, 'source': 'Quantis 2018'},
             'Jeans': {'weight_kg': 0.68, 'manufacturing_multiplier': 2.8, 'source': 'Quantis 2018'},
             'Hoodie': {'weight_kg': 0.58, 'manufacturing_multiplier': 1.6, 'source': 'Quantis 2018'},
-            'Kurta_Kurti': {'weight_kg': 0.30, 'manufacturing_multiplier': 1.6, 'source': 'Estimated for Indian apparel'},
-            'Saree': {'weight_kg': 0.80, 'manufacturing_multiplier': 1.5, 'source': 'Estimated for Indian apparel'},
+            'Kurta_Kurti': {'weight_kg': 0.30, 'manufacturing_multiplier': 1.6, 'source': 'Estimated for Indian apparel, based on similar weight items in Quantis 2018'},
+            'Saree': {'weight_kg': 0.80, 'manufacturing_multiplier': 1.5, 'source': 'Estimated for Indian apparel, based on weight and minimal cutting/sewing'},
+            'Polo_Shirt': {'weight_kg': 0.22, 'manufacturing_multiplier': 1.5, 'source': 'Quantis 2018'},
+            'Sweater': {'weight_kg': 0.48, 'manufacturing_multiplier': 1.6, 'source': 'WRAP UK 2017 (Average for "jumper/cardigan")'},
+            'Cardigan': {'weight_kg': 0.42, 'manufacturing_multiplier': 1.7, 'source': 'WRAP UK 2017 (Average for "jumper/cardigan")'},
+            'Chinos': {'weight_kg': 0.45, 'manufacturing_multiplier': 1.8, 'source': 'Quantis 2018 (Listed as "Cotton Trousers")'},
+            'Dress_Pants': {'weight_kg': 0.38, 'manufacturing_multiplier': 1.9, 'source': 'WRAP UK 2017 (Listed as "Trousers")'},
+            'Shorts': {'weight_kg': 0.25, 'manufacturing_multiplier': 1.5, 'source': 'Quantis 2018 (Listed as "Sports Shorts")'},
+            'Skirt': {'weight_kg': 0.30, 'manufacturing_multiplier': 1.7, 'source': 'WRAP UK 2017'},
+            'Dress': {'weight_kg': 0.35, 'manufacturing_multiplier': 1.8, 'source': 'Quantis 2018'},
+            'Jacket': {'weight_kg': 0.75, 'manufacturing_multiplier': 2.2, 'source': 'Quantis 2018 (Listed as "Polyester Jacket")'},
+            'Blazer': {'weight_kg': 0.60, 'manufacturing_multiplier': 2.0, 'source': 'WRAP UK 2017 (Listed as "Suit Jacket")'},
+            'Coat': {'weight_kg': 1.30, 'manufacturing_multiplier': 2.4, 'source': 'WRAP UK 2017'},
+            'Sportswear': {'weight_kg': 0.18, 'manufacturing_multiplier': 1.5, 'source': 'Quantis 2018 (Listed as "Polyester T-shirt")'},
         }
         brand_multipliers = {
-            'Aditya_Birla_Fashion_Retail': 0.82, 'Pantaloons': 0.82, 'Allen_Solly': 0.82, 'Van_Heusen': 0.82,
+            'Pantaloons': 0.82, 'Allen_Solly': 0.82, 'Van_Heusen': 0.82,
             'Westside': 0.88, 'Zudio': 0.92, 'LifeStyle': 0.90, 'Fabindia': 0.75, 'Reebok': 0.84, 'HRX': 0.85,
             'Patagonia': 0.65, 'H&M': 0.90, 'Zara': 0.92, 'Levi': 0.84, 'Nike': 0.82, 'Adidas': 0.80, 'Shein': 1.35, 'Unknown': 1.00,
         }
         condition_multipliers = {
-            'New': 1.00, 'Like_New': 0.08, 'Excellent': 0.12, 'Good': 0.18, 'Fair': 0.28, 'Poor': 0.45,
+            'brand_new': 1.00, 'Fairly New': 0.08, 'Excellent': 0.12, 'Used': 0.18, 'Visible Wear': 0.28, 'Needs Repair': 0.45,
         }
         lca_data = []
         for item_type, item_specs in garment_specs.items():

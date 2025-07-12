@@ -15,12 +15,12 @@ const itemSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['tops', 'bottoms', 'dresses', 'outerwear', 'shoes', 'accessories', 'activewear', 'formal', 'casual']
+    enum: ['tops', 'bottoms', 'dresses', 'formal']
   },
   type: {
     type: String,
     required: true,
-    enum: ['shirt', 'blouse', 'jeans', 'pants', 'skirt', 'dress', 'jacket', 'coat', 'sneakers', 'boots', 'bag', 'jewelry', 'other']
+    enum: ['shirt', 'blouse', 'jeans', 'pants', 'skirt', 'dress', 'jacket', 'coat', 'bag', 'other']
   },
   size: {
     type: String,
