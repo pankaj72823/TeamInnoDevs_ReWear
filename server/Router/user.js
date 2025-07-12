@@ -1,82 +1,72 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import passport from 'passport';
-import User from '../Schema/User.js';
+import express from "express";
+import jwt from "jsonwebtoken";
+import passport from "passport";
+import User from "../Schema/User.js";
+import upload from "../config/multer.js";
+import Item from '../Schema/Item.js'
+import Swap from '../Schema/Swap.js'
 
 const secret = process.env.JWT_SECRET;
 const router = express.Router();
 
-
-// POST route to register a new user
-router.post('/register', async (req, res) => {
-  const { name, email, password, username} = req.body;
+router.get('/dashboard',  passport.authenticate("jwt", { session: false }), async (req, res) => {
   try {
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ message: 'user with this email already exists.' });
-    }
-
-    user = new User({
-      name,
-      email,
-      password,
-      username,
-    });
+    const user = await User.findById(req.user._id).select('-password');
+    const userItems = await Item.find({ owner: req.user.id });
+    const activeSwaps = await Swap.find({
+      $or: [
+        { requester: req.user.id },
+        { itemOwner: req.user.id }
+      ],
+      status: { $in: ['pending', 'accepted', 'admin_review'] }
+    }).populate('requestedItem offeredItem uploadedItem requester itemOwner');
     
-    await user.save();
-
-    const payload = { id: user.id, name: user.name };
-    const token = jwt.sign(payload, secret, { expiresIn: '1d' });
-
-    res.status(201).json({ token: token });;
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'Failed to register user' });
-  }
-});
-
-// POST route to login and generate JWT token
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: 'User not found' });
-    }
-
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    const payload = { id: user.id, name: user.name };
-    const token = jwt.sign(payload, secret, { expiresIn: '1d' });
-
-    res.json({ token: token });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to login' });
-  }
-});
-
-// Route to get user's profile and activity
-router.get('/profile', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  const userId = req.user._id; // Get the authenticated user's ID
-
-  try {
-      const user = await User.findById(userId).select('-password -_id -createdAt -updatedAt -__v');
-
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+    const completedSwaps = await Swap.find({
+      $or: [
+        { requester: req.user.id },
+        { itemOwner: req.user.id }
+      ],
+      status: 'completed'
+    }).populate('requestedItem offeredItem uploadedItem requester itemOwner');
+    
+    res.json({
+      user,
+      items: userItems,
+      activeSwaps,
+      completedSwaps,
+      stats: {
+        totalItems: userItems.length,
+        activeItems: userItems.filter(item => item.status === 'active').length,
+        totalSwaps: user.totalSwaps,
+        points: user.points,
+        rating: user.rating
       }
-
-      res.json(user);
-
+    });
   } catch (error) {
-    console.log(error)
-    res.status(500).json( error );
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// Update User Profile
+router.put('/profile', passport.authenticate("jwt", { session: false }), upload.single('profilePicture'), async (req, res) => {
+  try {
+    const updates = { ...req.body };
+    if (req.file) {
+      updates.profilePicture = req.file.path;
+    }
+    
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      updates,
+      { new: true }
+    ).select('-password');
+    
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
