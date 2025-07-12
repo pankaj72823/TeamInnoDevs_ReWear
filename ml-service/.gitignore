@@ -1,16 +1,44 @@
-# Python cache files
+# --- Byte-compiled / optimized / C extensions ---
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 
-# Virtual Environment folder - This MUST be ignored
+# --- Virtual Environments ---
+# This MUST be ignored.
 venv/
 .venv/
 env/
-.env
+.env/
 
-# IDE and OS specific files
+# --- Environment Variables & Secrets ---
+# Never commit API keys!
+.env
+.env.*
+!.env.example
+
+# --- Trained Model Files ---
+# Explicitly ignore all common model file extensions.
+*.pkl
+*.joblib
+*.joblib.gz
+*.h5
+*.tflite
+*.onnx
+
+# --- IDE & Editor Folders ---
 .vscode/
 .idea/
+
+# --- OS-generated files ---
 .DS_Store
-*.swp
+Thumbs.db
+
+# --- Test & Coverage Artifacts ---
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Log files ---
+*.log
+logs/

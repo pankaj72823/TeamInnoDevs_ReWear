@@ -12,6 +12,11 @@ import { displayStartupMessage } from './config/start.js';
 import passportConfig from './config/passport.js';
 import authRoutes from './Router/auth.js';
 import userRoutes from './Router/user.js'
+import itemsRoutes from './Router/items.js'
+import adminRoutes from './Router/admin.js'
+import notificaionRoutes from './Router/notifications.js'
+import swapRoutes from './Router/swaps.js'
+
 
 // Initialize Express and HTTP server
 displayStartupMessage();
@@ -73,7 +78,10 @@ app.use((req, res, next) => {
 
 app.use('/auth', authRoutes);
 app.use('/user' , userRoutes);
-
+app.use('/items', itemsRoutes);
+app.use('/admin', adminRoutes);
+app.use('/notifications', notificaionRoutes);
+app.use('/swaps', swapRoutes);
 
 // Root route
 app.get('/', (req, res) => {

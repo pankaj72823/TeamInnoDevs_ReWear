@@ -7,14 +7,23 @@ import Login from './componets/Login'
 import Browse from './componets/Browse'
 import AddItem from './componets/AddItem'
 import SignUp from './componets/SignUp'
+import { useUser } from './hooks/UserContext' // Ensure this path is correct
+import { Navigate } from 'react-router-dom'
+import AdminDashboard from './componets/AdminDashboard'
 
 
 function App() {
+  const {user} = useUser(); // Assuming useUser is imported from UserContext
+
+
   return (
    <div>
     {/* define all route here */}
      <BrowserRouter>
       <Navbar />
+      <div className=' pt-1'>
+
+      
       {/* Define your routes here */}
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -22,8 +31,13 @@ function App() {
         <Route path="/add-item" element={<AddItem />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/" element={<LandingPage/>} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard/>} />
+         <Route
+            path="/dashboard"
+            element={user.role == 'user' ? <Dashboard /> :user.role=="admin"?<Navigate to='/admin-dashboard'></Navigate>: <Navigate to="/" replace />}
+          />
       </Routes>
+      </div>
     </BrowserRouter>
    </div>
   )
