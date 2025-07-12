@@ -1,27 +1,31 @@
-// import './App.css'
-// import Login from './componets/Login'
-
-// function App() {
-//   return (
-//    <div>
-//     {/* define all route here */}
-//     <Login></Login>
-//    </div>
-//   )
-// }
-
-// export default App
+import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Dashboard from './componets/Dashboard'
+import LandingPage from './componets/LandingPage'
+import Navbar from './componets/Navbar'
+import Login from './componets/Login'
+import Browse from './componets/Browse'
+import AddItem from './componets/AddItem'
 
 
-//sample working for testing..
-import { Button } from "@/components/ui/button"
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+   <div>
+    {/* define all route here */}
+     <BrowserRouter>
+      <Navbar />
+      {/* Define your routes here */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/add-item" element={<AddItem />} />
+        <Route path="/browse" element={<Browse />} />
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
+   </div>
   )
-}
+} 
 
 export default App
