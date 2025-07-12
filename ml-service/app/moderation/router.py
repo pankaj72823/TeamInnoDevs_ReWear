@@ -1,6 +1,4 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
-
-# Import the service class and data model from our service file
 from .service import ModerationService, ItemListing
 
 # Create the router instance

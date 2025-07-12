@@ -1,15 +1,11 @@
-# /ReWear_API/scripts/train_estimator.py
-
+# ml-service/scripts/train_estimator.py
 import pickle
-
 import sys
 import os
 
-# Add the project root to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from app.estimator.service import ResearchBasedSustainabilityEstimator
-# This import path MUST be correct for the new pickle file to work.
 
 
 def train_and_save():
@@ -23,7 +19,6 @@ def train_and_save():
     print("\n--- 2. Training the ML Models ---")
     estimator.train_ml_models()
     
-    # Save the file in the project's root directory
     filename = 'sustainability_estimator.pkl'
     
     print(f"\n--- 3. Saving the trained estimator to '{os.path.abspath(filename)}' ---")
