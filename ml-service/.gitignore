@@ -1,0 +1,16 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment folder - This MUST be ignored
+venv/
+.venv/
+env/
+.env
+
+# IDE and OS specific files
+.vscode/
+.idea/
+.DS_Store
+*.swp

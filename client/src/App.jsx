@@ -6,7 +6,7 @@ import Navbar from './componets/Navbar'
 import Login from './componets/Login'
 import Browse from './componets/Browse'
 import AddItem from './componets/AddItem'
-
+import SignUp from './componets/SignUp'
 
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
       {/* Define your routes here */}
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
         <Route path="/add-item" element={<AddItem />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/" element={<LandingPage/>} />
