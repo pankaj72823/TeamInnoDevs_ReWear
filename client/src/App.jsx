@@ -1,10 +1,11 @@
 import './App.css'
+import Login from './componets/Login'
 
 function App() {
   return (
    <div>
     {/* define all route here */}
-    <h1>App</h1>
+    <Login></Login>
    </div>
   )
 }
