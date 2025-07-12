@@ -85,7 +85,7 @@ export default function Signup() {
 
       if (response.data.token) {
         login(response.data.token);
-        navigate('/dashboard');
+        navigate('/');
       } else {
         throw new Error('No token received');
       }
