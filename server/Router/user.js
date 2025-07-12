@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import User from '../Schema/User.js';
 
-const secret = process.env.JWT_SECRETE;
+const secret = process.env.JWT_SECRET;
 const router = express.Router();
 
 
