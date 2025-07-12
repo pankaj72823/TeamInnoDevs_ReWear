@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'; // Remove this if using actual auth state
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual auth state
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Replace with actual auth state
   const navigate = useNavigate();
 
   // Replace with actual logout function from your auth context
@@ -45,6 +45,12 @@ const Navbar = () => {
                   className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition"
                 >
                   Add Item
+                </Link>
+                <Link 
+                  to="/dashboard" 
+                  className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition"
+                >
+                  Dashboard
                 </Link>
                 <button
                   onClick={handleLogout}
