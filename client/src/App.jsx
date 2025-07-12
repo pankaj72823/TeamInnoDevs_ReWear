@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./componets/Dashboard";
+import {Dashboard} from "./componets/Dashboard";
 import LandingPage from "./componets/LandingPage";
 import Navbar from "./componets/Navbar";
 import Login from "./componets/Login";

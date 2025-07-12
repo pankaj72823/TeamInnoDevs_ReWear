@@ -10,7 +10,6 @@ import cors from './config/corsConfig.js';
 import './config/mongodb.js';
 import { displayStartupMessage } from './config/start.js';
 import passportConfig from './config/passport.js';
-import promMid from 'express-prometheus-middleware';
 import authRoutes from './Router/auth.js';
 import userRoutes from './Router/user.js'
 import itemsRoutes from './Router/items.js'
@@ -25,13 +24,6 @@ const app = express();
 
 
 const PORT = process.env.PORT || 5000;
-app.use(promMid({
-  metricsPath: '/metrics',
-  collectDefaultMetrics: true,
-  requestDurationBuckets: [0.1, 0.5, 1, 1.5],
-  requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
-  responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
-}));
 
 // Middleware to parse incoming requests
 app.use(express.urlencoded({ extended: true }));
