@@ -1,2 +1,6 @@
-# TeamInnoDevs_ReWear
-Developing ReWear, a web-based platform that enables users to exchange unused clothing through direct swaps or a point-based redemption system.
+# Problem Statement 3:  ReWear- Community Clothing Exchange
+**TeamInnoDevs**
+pankaj7thegreat@gmail.com
+22itnir068@gmail.com
+amangaloliya@gmail.com
+avaniprajapati2810@gmail.com
