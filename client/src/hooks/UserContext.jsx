@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const UserContext = createContext();
 
@@ -13,22 +14,21 @@ export const UserProvider = ({ children }) => {
   }, [token]);
 
   const fetchUserFromToken = async (jwt) => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/profile`, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUser(data.user);
-      }
-    } catch (err) {
-      console.error("Invalid token or fetch failed");
-      setToken(null);
-      setUser(null);
-      localStorage.removeItem("token");
-    }
+   try {
+  const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/profile`, {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  });
+
+  console.log(res);
+  setUser(res.data);
+} catch (err) {
+  console.error("Invalid token or fetch failed");
+  setToken(null);
+  setUser(null);
+  localStorage.removeItem("token");
+}
   };
 
   const login = (newToken) => {
