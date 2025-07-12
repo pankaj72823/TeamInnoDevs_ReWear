@@ -1,9 +1,8 @@
-# /ReWear_API/main.py
-
+# ml-service/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# Import the routers from your app package
+
 from app.estimator.router import router as estimator_router
 from app.moderation.router import router as moderation_router
 
@@ -20,8 +19,7 @@ origins = [
     "http://localhost:3000",
     "http://localhost:8080",
     "http://127.0.0.1:8000",
-    "http://127.0.0.1:5500" # For your moderation_test.html
-    # Add other origins as needed
+    "http://127.0.0.1:5500" 
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -31,8 +29,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include the feature routers. The prefixes defined in each router
-# will be added to their URLs (e.g., /estimator/estimate/)
+
 app.include_router(estimator_router)
 app.include_router(moderation_router)
 

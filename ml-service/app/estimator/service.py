@@ -1,5 +1,4 @@
-# /ReWear_API/app/estimator/service.py
-
+# ml-service/app/estimator/service.py
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
@@ -11,9 +10,7 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-#
-# --- THIS IS THE CLASS DEFINITION THAT WAS MISSING ---
-#
+# ResearchBasedSustainabilityEstimator class for estimating sustainability impact of clothing swaps
 class ResearchBasedSustainabilityEstimator:
     """
     Research-backed sustainability impact calculator for clothing swaps

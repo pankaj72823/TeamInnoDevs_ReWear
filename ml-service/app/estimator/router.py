@@ -1,10 +1,6 @@
-# /ReWear_API/app/estimator/router.py
-
 import pickle
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
-
-# This import should now work correctly because service.py contains the class
 from .service import ResearchBasedSustainabilityEstimator
 
 router = APIRouter(

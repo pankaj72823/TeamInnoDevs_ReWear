@@ -8,7 +8,6 @@ import io
 import logging
 import google.generativeai as genai
 
-# Import the centralized API key from your config file
 from app.core.config import GEMINI_API_KEY
 
 # --- Basic Setup ---
@@ -19,9 +18,7 @@ logger = logging.getLogger(__name__)
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash') # Using a more recent model name
 
-
-# --- Business Logic Data Models ---
-# These define the objects your service works with.
+# --- Data Models ---
 class ItemCondition(str, Enum):
     NEW = "New"
     LIKE_NEW = "Like New"
@@ -75,7 +72,6 @@ class ModerationService:
     
     def _create_moderation_prompt(self, item: ItemListing) -> str:
         """Create a comprehensive moderation prompt for Gemini"""
-        # ... (This method is exactly the same as in your script)
         prompt = f"""
 SYSTEM INSTRUCTION: 
 You are a quality control assistant for a sustainable fashion swapping platform. Your job is to review item listings and decide if they are appropriate for approval. 
@@ -118,7 +114,6 @@ Please analyze the attached image along with the provided details and make your 
     
     async def moderate_item(self, item: ItemListing) -> ModerationResult:
         """Moderate an item listing using Gemini API"""
-        # ... (This method is also exactly the same as in your script)
         try:
             prompt = self._create_moderation_prompt(item)
             image_part = None
