@@ -11,8 +11,8 @@ import './config/mongodb.js';
 import { displayStartupMessage } from './config/start.js';
 import passportConfig from './config/passport.js';
 import promMid from 'express-prometheus-middleware';
-import userRoutes from './Router/user.js';
-import googleAuthRoutes from './Router/authRoutes.js';
+import authRoutes from './Router/auth.js';
+import userRoutes from './Router/user.js'
 
 // Initialize Express and HTTP server
 displayStartupMessage();
@@ -79,8 +79,9 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/user', userRoutes);
-app.use(googleAuthRoutes);
+app.use('/auth', authRoutes);
+app.use('/user' , userRoutes);
+
 
 // Root route
 app.get('/', (req, res) => {

@@ -56,7 +56,6 @@ const passportConfig = (passport) => {
     )
   );
 
-  // Required for session (optional if you're not using sessions)
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser(async (id, done) => {
     try {
