@@ -25,7 +25,7 @@ const notificationSchema = new mongoose.Schema({
   },
   relatedSwap: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'SwapRequest'
+    ref: 'Swap'
   },
   isRead: {
     type: Boolean,
@@ -43,5 +43,5 @@ notificationSchema.index({ recipient: 1, isRead: 1 });
 notificationSchema.index({ createdAt: -1 });
 
 
-const Notification = mongoose.model("Swap", notificationSchema);
+const Notification = mongoose.model("Notification", notificationSchema);
 export default Notification;

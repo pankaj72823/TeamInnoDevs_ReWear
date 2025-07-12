@@ -125,4 +125,38 @@ router.get(
   }
 );
 
+router.get('/init-admin', async (req, res) => {
+  try {
+    const existingAdmin = await User.findOne({ role: 'admin' });
+
+    if (existingAdmin) {
+      return res.status(400).json({ message: 'Admin already exists' });
+    }
+
+    const adminUser = new User({
+      firstName: 'Super',
+      lastName: 'Admin',
+      email: 'admin@rewear.com',
+      password: 'admin123',
+      role: 'admin',
+      status: 'active',
+    });
+
+    await adminUser.save();
+
+    const token = jwt.sign({ id: adminUser._id, role: 'admin' }, secret, { expiresIn: '1d' });
+
+    res.status(201).json({
+      message: 'Admin initialized successfully',
+      admin: {
+        id: adminUser._id,
+        email: adminUser.email,
+      },
+      token,
+    });
+  } catch (error) {
+    console.error('Init Admin Error:', error);
+    res.status(500).json({ error: 'Failed to initialize admin' });
+  }
+});
 export default router;
