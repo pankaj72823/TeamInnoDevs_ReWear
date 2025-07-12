@@ -48,6 +48,12 @@ const Navbar = () => {
                 >
                   Add Item
                 </Link>
+                <Link 
+                  to="/dashboard" 
+                  className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition"
+                >
+                  go to Dashboard
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition"
